@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        gap: 0.5rem;
+        overflow: hidden;
+      }
+
+      .anzeige {
+        text-align: right;
+        margin-bottom: 1rem;
+      }
+
+      .anzeige-ergebnis {
+        text-align: right;
+        margin-bottom: 1rem;
+      }
+
+      .button {
+        margin: 0.1rem;
+        width: 5rem;
+        height: 3rem;
+        background-color: white;
+        border: 0.5px solid;
+        border-radius: 3px;
+        border-color: grey;
+        font-size: 1.2rem;
+      }
+
+      .button:active {
+        background-color: grey;
+      }
+
+      .section-right {
+        border-left: 0.05rem solid grey;
+        padding-left: 1rem;
+        overflow-y: scroll;
+        max-height: 300px;
+        min-width: 80px;
+      }
+    </style>
+    <script>
+      let number = "";
+      let number2 = "";
+      let operation = "";
+      let ergebnis = "";
+
+      function calc() {
+        let element = document.getElementById("anzeige-ergebnis");
+        let elementErgebnis = document.getElementById("section-right");
+        if (number.length == 0) {
+          alert("Bitte eine Zahl eingeben!");
+        } else if (number2.length == 0) {
+          alert("Bitte eine zweite Zahl eingeben!");
+        } else if (operation == "/") {
+          ergebnis = Number(number) / Number(number2);
+          elementErgebnis.innerHTML +=
+            "<br><br>" + number + operation + number2;
+          number = ergebnis;
+          number2 = "";
+          operation = "";
+          element.innerHTML = ergebnis;
+          elementErgebnis.innerHTML += "<br>" + " = " + ergebnis;
+        } else if (operation == "*") {
+          ergebnis = Number(number) * Number(number2);
+          elementErgebnis.innerHTML +=
+            "<br><br>" + number + operation + number2;
+          number = ergebnis;
+          number2 = "";
+          operation = "";
+          element.innerHTML = ergebnis;
+          elementErgebnis.innerHTML += "<br>" + " = " + ergebnis;
+        } else if (operation == "-") {
+          ergebnis = Number(number) - Number(number2);
+          elementErgebnis.innerHTML +=
+            "<br><br>" + number + operation + number2;
+          number = ergebnis;
+          number2 = "";
+          operation = "";
+          element.innerHTML = ergebnis;
+          elementErgebnis.innerHTML += "<br>" + " = " + ergebnis;
+        } else if (operation == "+") {
+          ergebnis = Number(number) + Number(number2);
+          elementErgebnis.innerHTML +=
+            "<br><br>" + number + operation + number2;
+          number = ergebnis;
+          number2 = "";
+          operation = "";
+          element.innerHTML = ergebnis;
+          elementErgebnis.innerHTML += "<br>" + " = " + ergebnis;
+        }
+      }
+
+      function anzeige(value) {
+        let element = document.getElementById("anzeige");
+
+        if (operation.length == 0) {
+          number += Number(value);
+          element.innerHTML = number;
+        } else {
+          number2 += Number(value);
+          element.innerHTML = number + operation + number2;
+        }
+      }
+
+      function clearAnzeige() {
+        let element = document.getElementById("anzeige");
+        let elementErgebnis = document.getElementById("anzeige-ergebnis");
+        number = "";
+        number2 = "";
+        operation = "";
+        ergebnis = 0;
+        element.innerHTML = "";
+        elementErgebnis.innerHTML = "";
+      }
+
+      function saveOperation(value) {
+        let element = document.getElementById("anzeige");
+        if (operation.length !== 0) {
+          calc();
+          operation = value;
+          element.innerHTML = ergebnis + operation;
+        } else {
+          operation = value;
+          element.innerHTML = Number(number) + operation;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="section-left">
+      <div class="anzeige"><span id="anzeige"></span><br /></div>
+      <div class="anzeige-ergebnis">
+        <span id="anzeige-ergebnis"></span><br />
+      </div>
+      <div class="buttons">
+        <button onclick="anzeige(7)" class="button">7</button
+        ><button onclick="anzeige(8)" class="button">8</button
+        ><button onclick="anzeige(9)" class="button">9</button
+        ><button onclick="saveOperation('/')" class="button">/</button><br />
+        <button onclick="anzeige(4)" class="button">4</button
+        ><button onclick="anzeige(5)" class="button">5</button
+        ><button onclick="anzeige(6)" class="button">6</button
+        ><button onclick="saveOperation('*')" class="button">*</button><br />
+        <button onclick="anzeige(1)" class="button">1</button
+        ><button onclick="anzeige(2)" class="button">2</button
+        ><button onclick="anzeige(3)" class="button">3</button
+        ><button onclick="saveOperation('-')" class="button">-</button><br />
+        <button onclick="clearAnzeige()" class="button">CE</button
+        ><button onclick="anzeige(0)" class="button">0</button
+        ><button onclick="calc()" class="button">=</button
+        ><button onclick="saveOperation('+')" class="button">+</button>
+      </div>
+    </div>
+    <div id="section-right" class="section-right"></div>
+  </body>
+</html>
