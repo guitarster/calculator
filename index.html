@@ -111,12 +111,14 @@
       function clearAnzeige() {
         let element = document.getElementById("anzeige");
         let elementErgebnis = document.getElementById("anzeige-ergebnis");
+        let elementSectionRight = document.getElementById("section-right");
         number = "";
         number2 = "";
         operation = "";
         ergebnis = 0;
         element.innerHTML = "";
         elementErgebnis.innerHTML = "";
+        elementSectionRight.innerHTML = "";
       }
 
       function saveOperation(value) {
